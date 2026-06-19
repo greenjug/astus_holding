@@ -14,6 +14,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Season Sans";
+  src: url("../fonts/SeasonSans-TRIAL-Heavy.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -23,8 +31,6 @@
 }
 
 :root {
-  --purple-top: #7a2d91;
-  --purple-bottom: #5c1f73;
   --accent: #b8e63a;
   --white: #ffffff;
   --font: "Season Sans", "Helvetica Neue", Arial, sans-serif;
@@ -33,12 +39,13 @@
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font);
   color: var(--white);
-  background: linear-gradient(180deg, var(--purple-top) 0%, var(--purple-bottom) 100%);
+  background: linear-gradient(180deg, #7218A5 40.72%, #FE6B5B 196.78%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -53,34 +60,48 @@ body {
 
 .content {
   width: 100%;
-  max-width: 1200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 4rem;
+  max-width: 1320px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto auto;
+  column-gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
 }
 
-.intro {
-  flex: 1 1 0;
-  min-width: 0;
+.eyebrow {
+  grid-column: 1;
+  grid-row: 1;
+  color: var(--accent);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 h1 {
-  font-size: clamp(3.5rem, 8vw, 7rem);
-  font-weight: 700;
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 1.25rem;
+  max-width: 100%;
+  color: var(--white);
+  font-size: clamp(2.75rem, 5.5vw, 6rem);
+  font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
 
 .tagline {
-  margin-top: 1.75rem;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 1.5rem;
   font-size: clamp(1rem, 2vw, 1.35rem);
   font-weight: 700;
   line-height: 1.4;
 }
 
 .email {
+  grid-column: 1;
+  grid-row: 4;
   display: inline-block;
   margin-top: 1rem;
   color: var(--accent);
@@ -97,7 +118,10 @@ h1 {
 }
 
 .countdown {
-  flex: 0 0 auto;
+  grid-column: 2;
+  grid-row: 2;
+  margin-top: 1.25rem;
+  flex-shrink: 0;
 }
 
 .countdown__units {
@@ -115,7 +139,7 @@ h1 {
 
 .countdown__value {
   color: var(--accent);
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -123,7 +147,7 @@ h1 {
 
 .countdown__separator {
   color: var(--accent);
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
   font-weight: 700;
   line-height: 1;
   padding-top: 0;
@@ -132,7 +156,7 @@ h1 {
 .countdown__label {
   margin-top: 0.75rem;
   font-size: 0.95rem;
-  font-weight: 400;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -142,17 +166,44 @@ h1 {
   }
 
   .content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 3.5rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    row-gap: 0;
+  }
+
+  .eyebrow,
+  h1,
+  .tagline,
+  .email,
+  .countdown {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .countdown {
+    margin-top: 2.5rem;
     width: 100%;
-    overflow-x: auto;
+    max-width: 100%;
   }
 
   .countdown__units {
-    min-width: max-content;
+    width: 100%;
+    min-width: 0;
+    justify-content: space-between;
+    gap: 0.25rem;
+  }
+
+  .countdown__unit {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .countdown__value,
+  .countdown__separator {
+    font-size: clamp(1.5rem, 8.5vw, 2.5rem);
+  }
+
+  .countdown__label {
+    font-size: clamp(0.65rem, 2.5vw, 0.85rem);
   }
 }
